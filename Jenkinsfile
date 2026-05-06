@@ -1,13 +1,13 @@
 pipeline {
     agent any
 
-    // environment {
-    //     // SONAR_PROJECT_KEY = 'LLMOPS'
-    //     // SONAR_SCANNER_HOME = tool 'sonarqube'
-    //     // AWS_REGION = 'us-east-1'
-    //     // ECR_REPO = 'my-repo'
-    //     // IMAGE_TAG = 'latest'
-    // }
+    environment {
+        SONAR_PROJECT_KEY = 'LLMOPS'
+        SONAR_SCANNER_HOME = tool 'sonarqube'
+        // AWS_REGION = 'us-east-1'
+        // ECR_REPO = 'my-repo'
+        // IMAGE_TAG = 'latest'
+    }
 
     stages {
 
@@ -27,27 +27,27 @@ pipeline {
             }
         }
 
-        // stage('SonarQube Analysis') {
-        //     steps {
-        //         withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+        stage('SonarQube Analysis') {
+            steps {
+                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
 
-        //             withSonarQubeEnv('sonarqube') {
+                    withSonarQubeEnv('sonarqube') {
 
-        //                 withEnv(["SONAR_TOKEN=${SONAR_TOKEN}"]) {
-        //                     sh """
-        //                     ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
-        //                     -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
-        //                     -Dsonar.sources=. \
-        //                     -Dsonar.host.url=http://localhost:9000 \
-        //                     -Dsonar.login=\$SONAR_TOKEN
-        //                     """
-        //                 }
+                        withEnv(["SONAR_TOKEN=${SONAR_TOKEN}"]) {
+                            sh """
+                            ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
+                            -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+                            -Dsonar.sources=. \
+                            -Dsonar.host.url=http://localhost:9000 \
+                            -Dsonar.login=\$SONAR_TOKEN
+                            """
+                        }
 
-        //             }
+                    }
 
-        //         }
-        //     }
-        // }
+                }
+            }
+        }
 
         // stage('Build and Push Docker Image to ECR') {
         //     steps {
