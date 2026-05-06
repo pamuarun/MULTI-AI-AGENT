@@ -3,7 +3,7 @@ pipeline{
 
     environment {
         SONAR_PROJECT_KEY = 'LLMOPS'
-		SONAR_SCANNER_HOME = tool 'Sonarqube'
+		SONAR_SCANNER_HOME = tool 'sonarqube'
         AWS_REGION = 'us-east-1'
         ECR_REPO = 'my-repo'
         IMAGE_TAG = 'latest'
@@ -14,7 +14,7 @@ pipeline{
             steps{
                 script{
                     echo 'Cloning Github repo to Jenkins............'
-                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-token', url: 'https://github.com/data-guru0/MULTI-AI-AGENT-PROJECTS.git']])
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-token', url: 'https://github.com/pamuarun/MULTI-AI-AGENT.git']])
                 }
             }
         }
@@ -23,7 +23,7 @@ pipeline{
 			steps {
 				withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
     					
-					withSonarQubeEnv('Sonarqube') {
+					withSonarQubeEnv('sonarqube') {
     						sh """
 						${SONAR_SCANNER_HOME}/bin/sonar-scanner \
 						-Dsonar.projectKey=${SONAR_PROJECT_KEY} \
@@ -54,21 +54,21 @@ pipeline{
             }
         }
 
-        stage('Deploy to ECS Fargate') {
-    steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-token']]) {
-            script {
-                sh """
-                aws ecs update-service \
-                  --cluster multi-ai-agent-cluster \
-                  --service multi-ai-agent-def-service-shqlo39p  \
-                  --force-new-deployment \
-                  --region ${AWS_REGION}
-                """
-                }
-            }
-        }
-     }
+    //     stage('Deploy to ECS Fargate') {
+    // steps {
+    //     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-token']]) {
+    //         script {
+    //             sh """
+    //             aws ecs update-service \
+    //               --cluster multi-ai-agent-cluster \
+    //               --service multi-ai-agent-def-service-shqlo39p  \
+    //               --force-new-deployment \
+    //               --region ${AWS_REGION}
+    //             """
+    //             }
+    //         }
+    //     }
+    //  }
         
     }
 }
