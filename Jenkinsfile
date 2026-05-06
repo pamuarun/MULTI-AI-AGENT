@@ -33,16 +33,13 @@ pipeline {
 
                     withSonarQubeEnv('sonarqube') {
 
-                        withEnv(["SONAR_TOKEN=${SONAR_TOKEN}"]) {
-                            sh """
-                            ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
-                            -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
-                            -Dsonar.sources=. \
-                            -Dsonar.host.url=http://localhost:9000 \
-                            -Dsonar.login=\$SONAR_TOKEN
-                            """
-                        }
-
+                        sh """
+                        ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
+                        -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=http://localhost:9000 \
+                        -Dsonar.login=$SONAR_TOKEN
+                        """
                     }
 
                 }
