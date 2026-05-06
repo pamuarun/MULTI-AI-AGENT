@@ -28,23 +28,23 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            steps {
-                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+    steps {
+        withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
 
-                    withSonarQubeEnv('sonarqube') {
+            withSonarQubeEnv('sonarqube') {
 
-                        sh """
-                        ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
-                        -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=http://localhost:9000 \
-                        -Dsonar.login=$SONAR_TOKEN
-                        """
-                    }
-
-                }
+                sh '''
+                ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
+                -Dsonar.projectKey=LLMOPS \
+                -Dsonar.sources=. \
+                -Dsonar.host.url=http://localhost:9000 \
+                -Dsonar.login=$SONAR_TOKEN
+                '''
             }
+
         }
+    }
+}
 
         // stage('Build and Push Docker Image to ECR') {
         //     steps {
