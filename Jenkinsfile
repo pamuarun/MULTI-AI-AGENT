@@ -69,7 +69,6 @@ pipeline {
             }
         }
 
-     
 
         // stage('Deploy to ECS Fargate') {
         //     steps {
