@@ -37,7 +37,7 @@ pipeline {
                 ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
                 -Dsonar.projectKey=LLMOPS \
                 -Dsonar.sources=. \
-                -Dsonar.host.url=http://localhost:9000 \
+                -Dsonar.host.url=http://172.23.248.132:9000 \
                 -Dsonar.login=$SONAR_TOKEN
                 '''
             }
