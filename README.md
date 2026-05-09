@@ -4,7 +4,7 @@
 
 **Next-Generation Agentic AI System with Advanced Orchestration, CI/CD, and AWS ECS Deployment**
 
-[![Python Version](https://img.shields.io/badge/Python-3.10-blue?logo=python&logoColor=white)](#)
+[![Python Version](https://img.shields.io/badge/Python-3.14-blue?logo=python&logoColor=white)](#)
 [![LangChain](https://img.shields.io/badge/LangChain-Integration-green?logo=chainlink&logoColor=white)](#)
 [![LangGraph](https://img.shields.io/badge/LangGraph-Agentic%20Flows-purple)](#)
 [![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white)](#)
