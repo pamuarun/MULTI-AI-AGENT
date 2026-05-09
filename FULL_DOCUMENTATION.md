@@ -76,8 +76,8 @@ docker --version
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/data-guru0/LLMOPS-TESTING-1.git
-cd LLMOPS-TESTING-1
+git clone https://github.com/Antigravity/MULTI-AI-AGENT.git
+cd MULTI-AI-AGENT
 ```
 
 ### 2. Create and Activate a Virtual Environment
